@@ -69,7 +69,7 @@ def getTransaction(accountID,page):
             }
         ), 500
 
-@app.route("/transaction", methods=["DELETE"])
+@app.route("/user/transaction", methods=["DELETE"])
 def deleteTransactionon():
     try:
         data = request.get_json()

@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS `Bank`;
-
-CREATE DATABASE  IF NOT EXISTS `Bank` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+-- Create Database Bank;
+-- CREATE DATABASE  IF NOT EXISTS `2` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `Bank`;
 -- MySQL dump 10.13  Distrib 8.0.21, for macos10.15 (x86_64)
 --
@@ -53,7 +53,7 @@ DROP TABLE IF EXISTS `ScheduledTransactions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ScheduledTransactions` (
-  `TransactionID` int NOT NULL,
+  `TransactionID` varchar(255) NOT NULL,
   `AccountID` int NOT NULL,
   `ReceivingAccountID` int DEFAULT NULL,
   `Date` varchar(255) DEFAULT NULL,
@@ -81,9 +81,9 @@ DROP TABLE IF EXISTS `User`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `User` (
-  `UserID` int NOT NULL,
+  `UserID` Varchar(255) NOT NULL,
   `Username` varchar(20) DEFAULT NULL,
-  `Password` varchar(20) DEFAULT NULL,
+  `Password` varchar(255) DEFAULT NULL,
   `Firstname` varchar(255) DEFAULT NULL,
   `Lastname` varchar(255) DEFAULT NULL,
   `Email` varchar(255) DEFAULT NULL,
@@ -112,4 +112,12 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-20 22:55:07
+-- Dump completed on 2022-08-20 22:55:07bankaccount
+alter table ScheduledTransactions add scheduledTime varchar(255);
+alter table ScheduledTransactions add transactionStatus varchar(255);
+
+select * from ScheduledTransactions;
+
+-- Select * From ScheduledTransactions where AccountID= "621156213" limit 1 OFFSET 0;
+
+-- select count(TransactionID) From ScheduledTransactions where  AccountID= "621156213" ;
