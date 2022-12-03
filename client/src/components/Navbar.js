@@ -14,6 +14,7 @@ function Navbar(props) {
       <div className="App">
         <Link to="/">Home</Link>
         <Link to="/" onClick={OnLogout}>Logout</Link>
+        <Link to="/profile">User Profile</Link>
       </div>
     );
   }
