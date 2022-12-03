@@ -1,15 +1,13 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
-function Dashboard() {
+function Home() {
     return (
       <div className="App">
-        <p>Dashboard</p>
-        <Navbar/>
-        <Outlet/>
+        <p>Home</p>
       </div>
     );
   }
   
-  export default Dashboard;
+  export default Home;
   
