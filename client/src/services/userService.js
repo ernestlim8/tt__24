@@ -1,44 +1,37 @@
 import axios from "axios";
 const baseUrl = "/api/users";
 
-let token = null;
+const getAccounts = async (id) => {
+  let data = null;
+  let error = null;
 
-// const setUser = (user) => {
-//   window.localStorage.setItem("loggedAppUser", JSON.stringify(user));
-//   token = user.token;
-// };
+  try {
+    const response = await axios.get(`${baseUrl}/account?id=${id}`, user);
+    data = response.data;
 
-// const getUser = () => {
-//   const loggedUserJSON = window.localStorage.getItem("loggedAppUser");
-//   if (loggedUserJSON) {
-//     const user = JSON.parse(loggedUserJSON);
-//     token = user.token;
-//     return user;
-//   }
-//   return null;
-// };
-
-// const clearUser = () => {
-//   localStorage.clear();
-//   token = null;
-// };
-
-const getToken = () => token;
-
-const getAll = async () => {
-  const response = await axios.get(baseUrl);
-  return response.data;
-};
-
-const editAddress = async (id, user) => {
-    const response = await axios.get(`${baseUrl}/${id}`, user);
-    return response.data
+  } catch (e) {
+    error = e.message;
+  }
+  return {
+    data, error
+  }
 }
 
-const editEmail = async (id, user) => {
-    const response = await axios.get(`${baseUrl}/${id}`, user);
-    return response.data
+const updateUser = async (id) => {
+  let data = null;
+  let error = null;
+
+  try {
+    const response = await axios.put(`${baseUrl}?id=${id}`, user);
+    data = response.data;
+
+  } catch (e) {
+    error = e.message;
+  }
+  return {
+    data, error
+  }
 }
 
 // eslint-disable-next-line
-export default { setUser, getUser, clearUser, getToken, getAll, editAddress, editEmail };
+export default { getAccounts, updateUser };
