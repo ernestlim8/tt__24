@@ -1,10 +1,10 @@
 import {useState} from "react"
 
 function ProfilePage(props) {
-    const [email, setEmail] = useState("xx@gmail.com")//useState(props.email)
+    const [email, setEmail] = useState(props.email)
     const [emailEditClicked, setEmailEditClicked] = useState(false)
 
-    const [address, setAddress] = useState("address xyz") //useState(props.address)
+    const [address, setAddress] = useState(props.address)
     const [addressEditClicked, setAddressEditClicked] = useState(false)
 
     const emailEditingForm =
@@ -43,13 +43,13 @@ function ProfilePage(props) {
 
     return (
       <div className="App">
-        <p>Profile Page</p>
-          <h1>Username: </h1>
-          <h1>First name: </h1>
-          <h1>Last name: </h1>
+        <h1>Profile Page</h1>
+          <h2>Username: {props.Username} </h2>
+          <h2>First name: {props.Firstname} </h2>
+          <h2>Last name: {props.Lastname} </h2>
 
           <div>
-              <h1>Email: </h1>
+              <h2>Email: {props.Email} </h2>
               {!emailEditClicked
               ? <hl>{email}</hl>
               : emailEditingForm
@@ -58,7 +58,7 @@ function ProfilePage(props) {
           </div>
 
           <div>
-              <h1>Address: </h1>
+              <h2>Address: {props.Address} </h2>
               {!addressEditClicked
                   ? <hl>{address}</hl>
                   : addressEditingForm
@@ -66,7 +66,7 @@ function ProfilePage(props) {
               <button onClick={onAddressEditClicked}>Edit</button>
           </div>
 
-          <h1>Opt into bit statements: </h1>
+          <h2>Opt into bit statements: {props.OptIntoPhyStatements} </h2>
       </div>
     );
 }
