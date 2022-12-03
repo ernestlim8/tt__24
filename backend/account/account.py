@@ -16,7 +16,7 @@ def getAccountDetails(UserID):
         accountDetails = []
         for i in all_accounts:
             print("here")
-            accountDetails.append({"AccountID": i[0], "AccountType": i[1], "AccountBalance": i[2]})
+            accountDetails.append({"AccountID": i[0], "AccountType": i[2], "AccountBalance": i[3]})
             result["accountDetails"] = accountDetails
         return jsonify(
             {

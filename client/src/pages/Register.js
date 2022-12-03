@@ -45,15 +45,15 @@ const Register = () => {
     try {
       // TODO: uncomment when backend api is up
       
-      // const registrationData = registrationService.register(user);
-      // if (registrationData && registrationData.ID) {
-      //   authCtx.login(registrationData.ID)
-      //   navigate("/")
-      // } else {
-      //   let errorMessage = "Registration failed!";
-      //   throw new Error(errorMessage);
-      // }
-      authCtx.login("1")
+      const registrationData = registrationService.register(user);
+      if (registrationData && registrationData.ID) {
+        authCtx.login(registrationData.ID)
+        navigate("/")
+      } else {
+        let errorMessage = "Registration failed!";
+        throw new Error(errorMessage);
+      }
+      
       navigate("/")
 
     } catch (error) {

@@ -26,7 +26,7 @@ const baseUrl = "http://localhost:5001/login"
 
 const login = async (username, password) => {
     try {
-        const response = await axios.post(baseUrl, {username, password});
+        const response = await axios.post(`${baseUrl}?username=${username}&password=${password}`);
         return response.data;
     } catch (e) {
         const error = e.message;

@@ -2,7 +2,7 @@ import pymysql
 import uuid
 import hashlib
 
-from flask import Flask, request, abort
+from flask import Flask, request, abort,jsonify
 from flask_restful import Resource, Api
 from marshmallow import Schema, fields
 
@@ -13,7 +13,7 @@ api = Api(app)
 
 localhost='localhost'
 user='root'
-password='ronaldtan123'
+password='password'
 
 class UserRegistrationInputSchema(Schema):
     username = fields.Str(required=True)
@@ -124,8 +124,14 @@ class loginUser(Resource):
     def post(self):
         errors = UserLoginInput.validate(request.args)
         if errors:
-            pymysql.abort(401,str('User does not exist'))
-
+            abort(401,str('User does not exist'))
+        #     return jsonify(
+        #     {
+        #         "code": 500,
+        #         "message": "server error"
+        #     }
+        # ), 500
+            return
         user_details_input = UserLoginInput.dump(request.args)
         username_input = user_details_input['username']
         password_input = user_details_input['password']
@@ -155,6 +161,13 @@ class loginUser(Resource):
                         return (200, user_id[0])
                     else: 
                         abort(401,str('password incorrect'))
+                        # # return jsonify(
+                        # #     {
+                        # #         "code": 500,
+                        # #         "message": "server error"
+                        # #     }
+                        # # ), 500
+                        # return(401, "password incorrect")
              
 api.add_resource(loginUser, '/login/', endpoint='login')
 
