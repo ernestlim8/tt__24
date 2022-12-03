@@ -24,9 +24,11 @@ function App() {
    
   return (
     <div className="App">
-      {!authCtx.isLoggedIn
-      
-      ? <Login/>
+      {!authCtx.isLoggedIn ? 
+      <Routes>
+        <Route index element={<Login/>}/>
+        <Route path="/register" element={<div>hi</div>}/>
+      </Routes>
       : <Routes>
           <Route element={<Dashboard Logout={Logout} />}>
             <Route index element={<Home navigateToAccount={navigateToAccount}/>} />
