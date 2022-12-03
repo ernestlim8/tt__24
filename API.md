@@ -37,13 +37,13 @@
 
 ```json
 {
-    "username": "ronald",
-    "password": "ABC123",
-    "firstName": "ronald",
-    "lastName": "tan",
-    "email": "abc@gmail.com",
-    "address": "changi business park",
-    "optIntoPhyStatements": True,
+    "Username": "ronald",
+    "Password": "ABC123",
+    "Firstname": "ronald",
+    "LastName": "tan",
+    "Email": "abc@gmail.com",
+    "Dddress": "changi business park",
+    "OptIntoPhyStatements": True,
 }
 ```
 
