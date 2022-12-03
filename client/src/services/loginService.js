@@ -30,7 +30,7 @@ const login = async (username, password) => {
     let error = null;
 
     try {
-        const response = await axios.get(baseUrl, {params: {username, password}});
+        const response = await axios.post(baseUrl, {params: {username, password}});
         return response.data;
     } catch (e) {
         error = e.message;
