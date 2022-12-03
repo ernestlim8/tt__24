@@ -3,6 +3,7 @@ from flask_cors import CORS
 import transactionRepo 
 import datetime
 import math 
+import time
 app = Flask(__name__)
 CORS(app)
 
@@ -69,7 +70,7 @@ def getTransaction(accountID,page):
             }
         ), 500
 
-@app.route("/transaction", methods=["DELETE"])
+@app.route("/user/transaction", methods=["DELETE"])
 def deleteTransactionon():
     try:
         data = request.get_json()
@@ -89,6 +90,28 @@ def deleteTransactionon():
             }
         ), 500
 
+@app.route("/user/transaction", methods=["PUT"])
+def updateAll():
+    try:
+        data = request.get_json()
+        currDate = datetime.datetime.now()
+        ids = transactionRepo.getTransactionID(time.mktime(currDate.timetuple()))
+        for i in ids:
+            transactionRepo.UpdateTransaction(i[0], time)
+        return jsonify(
+            {
+                "code": 200,
+                "message": "OK" 
+            }
+        ), 200
+    except Exception as e:
+        print(e)
+        return jsonify(
+            {
+                "code": 500,
+                "message": "server error"
+            }
+        ), 500
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5003, debug=True)

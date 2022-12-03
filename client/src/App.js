@@ -7,28 +7,33 @@ import CreateTransaction from './components/CreateTransaction';
 import ProfilePage from './components/ProfilePage';
 import Home from './pages/Home';
 import { useState } from 'react';
+import TransactionList from './components/TransactionList';
 
 function App() {
   const [user, setUser] = useState("1");
-  
+  const navigate = useNavigate();
+
   function Logout() {
     setUser(null);
   }
 
+  function navigateToAccount(id) {
+    navigate(`/account/${id}`)
+  }
+
+
   return (
     <div className="App">
-      {!user 
-      
+      {!user
       ? <Login/>
       : <Routes>
           <Route element={<Dashboard Logout={Logout} />}>
-            <Route index element={<Home/>} />
+            <Route index element={<Home navigateToAccount={navigateToAccount}/>} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/create" element={<CreateTransaction />} />
+            <Route path="/account/:id" element={<TransactionList />} />
           </Route>
         </Routes>}
-      
-     
     </div>
   );
 }

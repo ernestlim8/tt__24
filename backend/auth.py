@@ -4,7 +4,7 @@ from flask import Flask, render_template, request
 from flask_login import login_user, login_required, logout_user, current_user
 # from forms import RegForm
 import pymysql
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 from marshmallow import Schema, fields
 
@@ -16,12 +16,12 @@ CORS(app)
 
 
 def connectDB():
-    load_dotenv()
+    # load_dotenv()
     return pymysql.connect(
-        host=os.getenv("HOST"),
-        user=os.getenv("USER"),
-        password=os.getenv("PASSWORD"),
-        database=os.getenv("DATABASE")
+        host="localhost",
+        user="root",
+        password="password",
+        database="dbsseed (bank)"
     )
 
 
@@ -31,27 +31,30 @@ class UserLoginInputSchema(Schema):
 
 UserLoginInput = UserLoginInputSchema()
 
-@app.route("/login", methods=['POST'])
+@app.route("/login", methods=['GET','POST'])
 @app.route('/')
 def login():
-    errors = UserLoginInput.validate(request.arg)
-    if errors:
-        abort(401,str('User does not exist'))
+    if request.method == 'GET':
+        return "200"
+    if request.method == 'POST':
+        errors = UserLoginInput.validate(request.arg)
+        if errors:
+            pymysql.abort(401,str('User does not exist'))
 
-    user_details_input = UserLoginInput.dump(request.args)
-    username_input = user_details_input['username']
-    password_input = user_details_input['password']
+        user_details_input = UserLoginInput.dump(request.args)
+        username_input = user_details_input['username']
+        password_input = user_details_input['password']
 
-    conn = connectDB()
-    cursor = conn.cursor()
+        conn = connectDB()
+        cursor = conn.cursor()
 
-    user_name = cursor.execute("SELECT UserID FROM User WHERE Username=?", (username_input,)).fetchone()
-    if user_name:
-        user_pw = cursor.execute("SELECT Password FROM User WHERE Username=?", (username_input,)).fetchone()
-        if user_pw == password_input:
-            return (render_template)
-        else: 
-             abort(401,str('password incorrect'))
+        user_name = cursor.execute("SELECT UserID FROM User WHERE Username=?", (username_input,)).fetchone()
+        if user_name:
+            user_pw = cursor.execute("SELECT Password FROM User WHERE Username=?", (username_input,)).fetchone()
+            if user_pw == password_input:
+                return "200" #(render_template)
+            else: 
+                pymysql.abort(401,str('password incorrect'))
              
 if __name__ == '__main__':
     app.run()
