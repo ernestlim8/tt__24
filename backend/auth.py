@@ -36,25 +36,23 @@ UserLoginInput = UserLoginInputSchema()
 def login():
     errors = UserLoginInput.validate(request.arg)
     if errors:
-        abort(40,str(errors))
+        abort(401,str('User does not exist'))
 
     user_details_input = UserLoginInput.dump(request.args)
     username_input = user_details_input['username']
     password_input = user_details_input['password']
 
-    conn = connection()
+    conn = connectDB()
     cursor = conn.cursor()
 
-    user_id = cursor.execute("SELECT UserID FROM User WHERE UserID=?", (UserId,)).fetchone()
-    if user_id:
-        user_pw = cursor.execute("SELECT Password FROM User WHERE UserID=2;", (UserId,)).fetchone()
+    user_name = cursor.execute("SELECT UserID FROM User WHERE Username=?", (username_input,)).fetchone()
+    if user_name:
+        user_pw = cursor.execute("SELECT Password FROM User WHERE Username=?", (username_input,)).fetchone()
         if user_pw == password_input:
             return (render_template)
         else: 
-            return 'password incorrect'
-    else:
-        return 'password does not exist'
-
+             abort(401,str('password incorrect'))
+             
 if __name__ == '__main__':
     app.run()
 
