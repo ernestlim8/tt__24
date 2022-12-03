@@ -13,6 +13,7 @@ const RegisterPage = () => {
   const lastNameInputRef = useRef();
   const emailInputRef = useRef();
   const addressInputRef = useRef();
+  const optIntoStatementsRef = useRef();
 
   const authCtx = useContext(AuthContext);
 
@@ -26,6 +27,7 @@ const RegisterPage = () => {
     const lastName = lastNameInputRef.current.value;
     const email = emailInputRef.current.value;
     const address = addressInputRef.current.value;
+    const optIntoStatements = optIntoStatementsRef.current.value
 
     if (confirmPassword !== password) {
         alert("Passwords do not match!")
@@ -40,6 +42,7 @@ const RegisterPage = () => {
         lastName,
         email,
         address,
+        optIntoStatements
     }
 
     try {
@@ -128,6 +131,14 @@ const RegisterPage = () => {
             id="address"
             required
             ref={addressInputRef}
+          />
+        </div>
+        <div className={classes.control}>
+          <label htmlFor="optIntoStatements">Opt Into Statements</label>
+          <input
+            type="checkbox"
+            id="optIntoStatements"
+            ref={optIntoStatementsRef}
           />
         </div>
         <div className={classes.actions}>
