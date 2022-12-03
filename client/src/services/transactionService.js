@@ -1,13 +1,13 @@
 import axios from "axios";
 const baseUrl = "/api/user/transaction";
 
-const getTransaction = async (transaction) => {
+const getTransaction = async (id) => {
   let data = null
   let error = null
 
   try {
-    const response = await axios.post(baseUrl, transaction);
-    data = transaction.data
+    const response = await axios.post(`${baseUrl}/account?id=${id}`, transaction);
+    data = response.data
   } catch (err) {
     error = err.message()
   }
@@ -15,36 +15,32 @@ const getTransaction = async (transaction) => {
   return { data, error }
 };
 
-const postDeleteTransaction = async (transaction) => {
+const postDeleteTransaction = async (transaction, id) => {
+  let data = null;
+  let error = null;
 
+  try {
+    const response = await axios.post(baseUrl, transaction);
+    data = response.data;
+
+  } catch (e) {
+    error = e.message;
+  }
+  return { data, error }
 }
 
-const postNewTransaction = async (transaction) => {
+const postNewTransaction = async (id, transaction) => {
   let data = null
   let error = null
 
   try {
     const response = await axios.post(baseUrl, transaction);
-    data = transaction.data
+    data = response.data
   } catch (err) {
     error = err.message()
   }
 
   return { data, error }
-};
-
-const postDeleteTransaction = async (transaction) => {
-  let data = null
-  let error = null
-
-  try {
-    const response = await axios.post(baseUrl, transaction);
-    data = transaction.data
-  } catch (err) {
-    error = err.message()
-  }
-
-  return { data: data, error: error }
 };
 
 // const create = async (newObject) => {
