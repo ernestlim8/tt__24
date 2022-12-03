@@ -2,7 +2,7 @@ import pymysql as pymysql
 
 localhost='localhost'
 user='root'
-password='password'
+password='ronaldtan123'
 
 def parse_sql(filename):
     data = open(filename, 'r').readlines()
