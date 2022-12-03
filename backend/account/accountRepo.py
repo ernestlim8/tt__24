@@ -14,8 +14,8 @@ def getAccountDetails(userID):
 def connectDB():
     load_dotenv()
     return pymysql.connect(
-        host=os.getenv("HOST"),
-        user=os.getenv("USER"),
-        password=os.getenv("PASSWORD"),
-        database=os.getenv("DATABASE")
+        host= "localhost",
+        user= "root",
+        password= "password",
+        database= "Bank"
     )

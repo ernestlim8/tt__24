@@ -1,26 +1,27 @@
-from flask import Flask, jsonify,request
+from flask import Flask, jsonify
 from flask_cors import CORS
 import accountRepo
-import datetime
+
 app = Flask(__name__)
 CORS(app)
 
-#get account details
+
+# get account details
 @app.route("/user/account/<UserID>", methods=["GET"])
 def getAccountDetails(UserID):
     try:
         all_accounts = accountRepo.getAccountDetails(UserID)
         print(all_accounts)
-        result= {}
-        accountDetails =[]
+        result = {}
+        accountDetails = []
         for i in all_accounts:
             print("here")
-            accountDetails.append({"AccountID":i[0], "AccountType":i[1], "AccountBalance":i[2]})
+            accountDetails.append({"AccountID": i[0], "AccountType": i[1], "AccountBalance": i[2]})
             result["accountDetails"] = accountDetails
         return jsonify(
             {
                 "code": 200,
-                "message": "ok"
+                "message": result
             }
         ), 200
     except Exception as e:
@@ -32,5 +33,6 @@ def getAccountDetails(UserID):
             }
         ), 500
 
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5003, debug=True)
+    app.run(host="0.0.0.0", port=5002, debug=True)
