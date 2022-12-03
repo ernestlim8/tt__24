@@ -12,9 +12,19 @@ def createTransaction():
         currDate = datetime.datetime.now()
         data = request.get_json()
         timeStamp = data["scheduleTime"]
-        schduledDate  = datetime.datetime.fromtimestamp( timeStamp )
+        schduledDate  = datetime.datetime.fromtimestamp( int(timeStamp) )
         if schduledDate > currDate:
-            pass
+            data["transactionStatus"] ="pending"
+            transactionRepo.createScheudleTransaction(data)
+        else:
+            data["transactionStatus"] ="Done"
+            transactionRepo.createTransaction(data)
+        return jsonify(
+            {
+                "code": 200,
+                "message": "ok"
+            }
+        ), 200
     except Exception as e:
         print(e)
         return jsonify(
@@ -23,6 +33,33 @@ def createTransaction():
                 "message": "server error"
             }
         ), 500
+
+
+# #get transaction 
+# @app.route("/transaction/<accountType>/<page>")
+# def getTransaction(accountType,page):
+#     try:
+#         limit = 5
+#         offset = limit *(page-1)
+#         all_transaction = getTransaction(accountType, limit, offset)
+#         result = {}
+    
+#         return jsonify(
+#             {
+#                 "code": 200,
+#                 "message": "ok"
+#             }
+#         ), 200
+#     except Exception as e:
+#         print(e)
+#         return jsonify(
+#             {
+#                 "code": 500,
+#                 "message": "server error"
+#             }
+#         ), 500
+
+
 
 
 if __name__ == "__main__":
