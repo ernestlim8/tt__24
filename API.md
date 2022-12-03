@@ -1,12 +1,33 @@
 # Verify username and password
 
-## GET { endpoint } /login?username=xxx&password=xxx
+## POST { endpoint } /login
+
+### Request body
+
+- password is hashed before sending, and saved as a hash in the db
+
+```json
+{
+  "username": "ronald",
+  "password": 123456789
+}
+```
 
 ### Response body
+
+- successful authentication
 
 ```json
 {
   "ID": 1
+}
+```
+
+- unsuccessful authetication
+
+```json
+{
+  "message": 401
 }
 ```
 

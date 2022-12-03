@@ -1,15 +1,14 @@
 import { Outlet } from "react-router-dom";
+import BankDetail from "../components/BankDetail";
 import Navbar from "../components/Navbar";
 
-function Dashboard(props) {
+function Home() {
     return (
       <div className="App">
-        <p>Dashboard</p>
-        <Navbar Logout={props.Logout}/>
-        <Outlet/>
+        <BankDetail/>
       </div>
     );
   }
   
-  export default Dashboard;
+  export default Home;
   
