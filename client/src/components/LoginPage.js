@@ -1,7 +1,7 @@
 import { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import loginService from "../services/loginService";
-import classes from "./LoginPage.module.css";
+import classes from "./Form.module.css";
 import AuthContext from "../auth-context";
 
 const LoginPage = () => {

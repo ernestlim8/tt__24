@@ -1,5 +1,6 @@
 import './App.css';
 import Login from './pages/Login.js'
+import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import { BrowserRouter as Router, Route, Routes, Switch, useNavigate } from 'react-router-dom';
 import CreateTransaction from './components/CreateTransaction';
@@ -27,7 +28,7 @@ function App() {
       {!authCtx.isLoggedIn ? 
       <Routes>
         <Route index element={<Login/>}/>
-        <Route path="/register" element={<div>hi</div>}/>
+        <Route path="/register" element={<Register/>}/>
       </Routes>
       : <Routes>
           <Route element={<Dashboard Logout={Logout} />}>

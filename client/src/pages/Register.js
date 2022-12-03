@@ -1,7 +1,7 @@
 import { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import registrationService from "../services/registrationService";
-import classes from "./LoginPage.module.css";
+import classes from "../components/Form.module.css"
 import AuthContext from "../auth-context";
 
 const Register = () => {
