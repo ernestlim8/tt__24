@@ -6,15 +6,16 @@ import uuid
 
 def createScheudleTransaction(transactionInfo):
     tid = str(uuid.uuid4())
+    # print(tid)
     conn = connectDB()
     cur = conn.cursor()
     cur.execute(
                 "INSERT INTO ScheduledTransactions"+
                 "(TransactionID, AccountID,ReceivingAccountID,TransactionAmount,Comment,scheduledTime, transactionStatus)"+
-                "VALUES ("+ conn.escape(tid)+","+ conn.escape(transactionInfo["accID"])+","+ conn.escape(transactionInfo["recipientId"])+","+ conn.escape(transactionInfo["transactionAmt"])+","
-                + conn.escape(transactionInfo["comment"]) +conn.escape(transactionInfo["scheduleTime"])+conn.escape(transactionInfo['transactionStatus'])+ ");"  
+                "VALUES ("+ conn.escape(tid)+","+ conn.escape(transactionInfo["accID"])+","+ conn.escape(transactionInfo["recipientId"])+","+ conn.escape(transactionInfo["amount"])+","
+                + conn.escape(transactionInfo["comment"]) +","+conn.escape(transactionInfo["scheduleTime"])+","+conn.escape(transactionInfo['transactionStatus'])+ ");"  
             )
-    cur.commit()
+    conn.commit()
     conn.close()
 
 def createTransaction(transactionInfo):
@@ -25,9 +26,9 @@ def createTransaction(transactionInfo):
                 "INSERT INTO ScheduledTransactions"+
                 "(TransactionID, AccountID,ReceivingAccountID,TransactionAmount,Comment,scheduledTime, transactionStatus,Date)"+
                 "VALUES ("+ conn.escape(tid)+","+ conn.escape(transactionInfo["accID"])+","+ conn.escape(transactionInfo["recipientId"])+","+ conn.escape(transactionInfo["amount"])+","
-                + conn.escape(transactionInfo["comment"]) +conn.escape(transactionInfo["scheduleTime"])+conn.escape(transactionInfo['transactionStatus']),+conn.escape(transactionInfo['scheduleTime'])+ ");"  
+                + conn.escape(transactionInfo["comment"]) +","+conn.escape(transactionInfo["scheduleTime"])+","+conn.escape(transactionInfo['transactionStatus'])+","+conn.escape(transactionInfo['scheduleTime'])+ ");"  
             )
-    cur.commit()
+    conn.commit()
     conn.close()
 
 
@@ -51,7 +52,24 @@ def deleteTransaction(transactionID):
     conn = connectDB()
     cur = conn.cursor()
     cur.execute("Delete from ScheduledTransactions where TransactionID = "+conn.escape(transactionID)+";" )
-    cur.commit()
+    conn.commit()
+    conn.close()
+
+def getTransactionID(time):
+    conn = connectDB()
+    cur = conn.cursor()
+    cur.execute("select TransactionID from ScheduledTransactions where scheduledTime <= "+conn.escape(time)+";" )
+    result = cur.fetchall()
+    # conn.commit()
+    conn.close()
+    return result
+
+def UpdateTransaction(id, time):
+    conn = connectDB()
+    cur = conn.cursor()
+    cur.execute("Update ScheduledTransactions SET Date="+conn.escape(time)+", transactionStatus = 'Done' WHERE TransactionID = "+ conn.escape(id))
+    # result = cur.fetchall()
+    conn.commit()
     conn.close()
 
 
