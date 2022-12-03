@@ -4,9 +4,19 @@
 
 ### Response body
 
+- successful authentication
+
 ```json
 {
   "ID": 1
+}
+```
+
+- unsuccessful authetication
+
+```json
+{
+  "message": 401
 }
 ```
 
