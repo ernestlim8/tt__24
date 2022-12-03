@@ -5,10 +5,12 @@ import hashlib
 from flask import Flask, request, abort
 from flask_restful import Resource, Api
 from marshmallow import Schema, fields
+from flask_cors import CORS
 
 from dotenv import load_dotenv
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 localhost='localhost'
