@@ -24,8 +24,7 @@ function App() {
 
   return (
     <div className="App">
-      {!user 
-      
+      {!user
       ? <Login/>
       : <Routes>
           <Route element={<Dashboard Logout={Logout} />}>
@@ -35,8 +34,6 @@ function App() {
             <Route path="/account/:id" element={<TransactionList />} />
           </Route>
         </Routes>}
-      
-     
     </div>
   );
 }
