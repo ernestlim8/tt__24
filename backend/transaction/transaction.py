@@ -28,9 +28,11 @@ def createTransaction():
             data["transactionStatus"] ="pending"
             transactionRepo.createScheudleTransaction(data)
         else:
+            print("Here")
             ## increase account balance
-
-            # 
+            transactionRepo.increaseTransaction(data["recipientId"],data["amount"] )
+            # decrease account balance
+            transactionRepo.decreaseTransaction(data["accID"],data["amount"] )
             data["transactionStatus"] ="Done"
             transactionRepo.createTransaction(data)
         return jsonify(
@@ -109,7 +111,12 @@ def updateAll():
         currDate = datetime.datetime.now()
         ids = transactionRepo.getTransactionID(time.mktime(currDate.timetuple()))
         for i in ids:
+            print()
             transactionRepo.UpdateTransaction(i[0], time.mktime(currDate.timetuple()))
+            ## increase account balance
+            transactionRepo.increaseTransaction(i[2],i[4])
+            # decrease account balance
+            transactionRepo.decreaseTransaction(i[1],i[4] )
         return jsonify(
             {
                 "code": 200,

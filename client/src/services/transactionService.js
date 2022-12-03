@@ -1,12 +1,12 @@
 import axios from "axios";
-const baseUrl = "/api/user/transaction";
+const baseUrl = "http://localhost:5003/user/transaction";
 
-const getTransaction = async (id) => {
+const getTransactions = async (id, page) => {
   let data = null
   let error = null
 
   try {
-    const response = await axios.post(`${baseUrl}/account?id=${id}`, transaction);
+    const response = await axios.get(`${baseUrl}/${id}/${page}`);
     data = response.data
   } catch (err) {
     error = err.message()
@@ -55,7 +55,7 @@ const postNewTransaction = async (id, transaction) => {
 
 // eslint-disable-next-line
 export default {
-  getTransaction,
+  getTransactions,
   postNewTransaction,
 };
 

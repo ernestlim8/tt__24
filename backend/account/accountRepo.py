@@ -6,7 +6,7 @@ def getAccountDetails(userID):
     conn = connectDB()
     cur = conn.cursor()
     cur.execute(
-        "SELECT * from bankaccount where UserId=" + conn.escape(userID) + ";")
+        "SELECT * from BankAccount where UserId=" + conn.escape(userID) + ";")
     result = cur.fetchall()
     conn.close()
     return result
