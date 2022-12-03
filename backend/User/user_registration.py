@@ -34,7 +34,7 @@ class registerUser(Resource):
             abort(406, str(errors))
 
         # extract input values
-        student_name_input = UserRegistrationInput.dump(request.args)
+        user_registration_input = UserRegistrationInput.dump(request.args)
         
         # connect mySQL
         conn = pymysql.connect(host=localhost,
@@ -51,10 +51,10 @@ class registerUser(Resource):
 
         # Create a new record
         newUserID = uuid.uuid4()
-        hashedPassword = hashlib.sha256(student_name_input['password'].encode('utf-8')).hexdigest()
+        hashedPassword = hashlib.sha256(user_registration_input['password'].encode('utf-8')).hexdigest()
         sql = '''
-            INSERT INTO `User` VALUES (%s,'%s','%s','%s','%s','%s','%s',_binary '\\%s');
-            ''' % (str(newUserID), student_name_input['username'], hashedPassword, student_name_input['firstName'], student_name_input['lastName'], student_name_input['email'], student_name_input['address'], student_name_input['optIntoPhyStatements'])
+            INSERT INTO `User` VALUES ('%s','%s','%s','%s','%s','%s','%s',_binary '\\%s');
+            ''' % (str(newUserID), user_registration_input['username'], hashedPassword, user_registration_input['firstName'], user_registration_input['lastName'], user_registration_input['email'], user_registration_input['address'], user_registration_input['optIntoPhyStatements'])
 
         print (sql)
         
