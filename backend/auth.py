@@ -1,29 +1,16 @@
-
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask import Flask, render_template, request
-from flask_login import login_user, login_required, logout_user, current_user
-# from forms import RegForm
 import pymysql
-# from dotenv import load_dotenv
-import os
+import hashlib
+
+from flask import Flask, request, abort
+from flask_restful import Resource, Api
 from marshmallow import Schema, fields
 
-
-from flask import Flask, jsonify,request
-from flask_cors import CORS
 app = Flask(__name__)
-CORS(app)
+api = Api(app)
 
-
-def connectDB():
-    # load_dotenv()
-    return pymysql.connect(
-        host="localhost",
-        user="root",
-        password="Xarielle6!",
-        database="Bank"
-    )
-
+localhost='localhost'
+user='root'
+password='password'
 
 class UserLoginInputSchema(Schema):
     username = fields.Str(required=True)
@@ -31,12 +18,8 @@ class UserLoginInputSchema(Schema):
 
 UserLoginInput = UserLoginInputSchema()
 
-@app.route("/login", methods=['GET','POST'])
-@app.route('/')
-def login():
-    if request.method == 'GET':
-        return "200"
-    if request.method == 'POST':
+class loginUser(Resource):
+    def post(self):
         errors = UserLoginInput.validate(request.args)
         if errors:
             pymysql.abort(401,str('User does not exist'))
@@ -45,23 +28,32 @@ def login():
         username_input = user_details_input['username']
         password_input = user_details_input['password']
 
-        conn = connectDB()
+        conn = pymysql.connect(host=localhost,
+                             user=user,
+                             password=password,)
+
+        # set to `Bank` database
+        with conn.cursor() as cursor:
+            cursor.execute("USE `Bank`")
 
         with conn:
             with conn.cursor() as cursor:
             # Create a new record
             # sql = "INSERT INTO `users` (`email`, `password`) VALUES (%s, %s)"
             # cursor.execute(sql, ('webmaster@python.org', 'very-secret'))
-
-                user_id = cursor.execute("SELECT UserID FROM User WHERE Username=?", (username_input,)).fetchone()
-                print (user_id)
+                SQLUserID = "SELECT UserID FROM User WHERE Username='%s'" % (username_input)
+                hashed_password = hashlib.sha256(password_input.encode('utf-8')).hexdigest()
+                SQLPassword = "SELECT Password FROM User WHERE Username='%s'" % (username_input)
+                cursor.execute(SQLUserID)
+                user_id = cursor.fetchone()
                 if user_id:
-                    user_pw = cursor.execute("SELECT Password FROM User WHERE Username=?", (username_input,)).fetchone()
-                    if user_pw == password_input:
+                    cursor.execute(SQLPassword)
+                    user_pw = cursor.fetchone()
+                    if str(user_pw[0]) == str(hashed_password):
                         return "200" #(render_template)
                     else: 
-                        pymysql.abort(401,str('password incorrect'))
+                        abort(401,str('password incorrect'))
              
-if __name__ == '__main__':
-    app.run()
+api.add_resource(loginUser, '/login/', endpoint='login')
+app.run()
 
