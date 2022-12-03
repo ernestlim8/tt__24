@@ -23,7 +23,7 @@ const LoginPage = () => {
       // const loginData = loginService.login(enteredUsername, enteredPassword);
       // if (loginData && loginData.ID) {
       //   authCtx.login(loginData.ID)
-      //   navigate.replace("/")
+      //   navigate("/")
       // } else {
       //   let errorMessage = "Authentication failed!";
       //   throw new Error(errorMessage);

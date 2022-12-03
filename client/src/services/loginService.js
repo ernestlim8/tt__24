@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "/api"
+const baseUrl = "/api/login"
 
 // const setUser = (user) => {
 //   window.localStorage.setItem("loggedAppUser", JSON.stringify(user));
@@ -24,20 +24,15 @@ const baseUrl = "/api"
 
 // const getToken = () => token;
 
-
 const login = async (username, password) => {
-    let data = null;
-    let error = null;
-
     try {
-        const response = await axios.get(baseUrl, {params: {username, password}});
+        const response = await axios.post(baseUrl, {username, password});
         return response.data;
     } catch (e) {
-        error = e.message;
+        const error = e.message;
+        console.log(error)
     }
-    return {
-        data, error
-    }
+
 }
 
 // eslint-disable-next-line
