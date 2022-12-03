@@ -6,7 +6,7 @@ const getAccounts = async (id) => {
   let error = null;
 
   try {
-    const response = await axios.get(`${baseUrl}/account?id=${id}`, user);
+    const response = await axios.get(`${baseUrl}/account?id=${id}`);
     data = response.data;
 
   } catch (e) {
@@ -22,7 +22,7 @@ const updateUser = async (id) => {
   let error = null;
 
   try {
-    const response = await axios.put(`${baseUrl}?id=${id}`, user);
+    const response = await axios.put(`${baseUrl}?id=${id}`);
     data = response.data;
 
   } catch (e) {

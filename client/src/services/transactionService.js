@@ -57,6 +57,7 @@ const postNewTransaction = async (id, transaction) => {
 export default {
   getTransactions,
   postNewTransaction,
+  postDeleteTransaction,
 };
 
 
