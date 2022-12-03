@@ -1,17 +1,6 @@
 # Verify username and password
 
-## POST { endpoint } /login
-
-### Request body
-
-- password is hashed before sending, and saved as a hash in the db
-
-```json
-{
-  "username": "ronald",
-  "password": 123456789
-}
-```
+## GET { endpoint } /login?username=xxx&password=xxx
 
 ### Response body
 
@@ -125,14 +114,13 @@
 
 ### Request body
 
-- `id` refers to transaction ID
 - `recipientId` refers to tha bank account ID of the recepient bank
 
 ```json
 {
-  "id": 12345,
+  "accID": 12345,
   "recipientId": 34567,
-  "scheduledDatetime": 987654321,
+  "scheduleTime": 987654321,
   "amount": 123.45,
   "comment": "for mom"
 }
