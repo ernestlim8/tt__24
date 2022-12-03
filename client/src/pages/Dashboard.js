@@ -1,4 +1,4 @@
-import BankDetail from "../components/BankDetail";
+import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Transaction from "../components/Transaction";
 
@@ -7,8 +7,7 @@ function Dashboard() {
       <div className="App">
         <p>Dashboard</p>
         <Navbar/>
-        <Transaction/>     
-        <BankDetail />
+        <Outlet/>
       </div>
     );
   }
