@@ -1,6 +1,15 @@
 # Verify username and password
 
-## GET { endpoint } /login?username=xxx&password=xxx
+## GET { endpoint } /login
+
+### Request body
+
+```json
+{
+  "username": "ronald",
+  "password": 123456789
+}
+```
 
 ### Response body
 
@@ -50,7 +59,7 @@
 
 # Get bank account details
 
-## GET { endpoint } /user/account?id=xxx
+## GET { endpoint } /user/account/<accountID>
 
 ### Response body
 
@@ -110,7 +119,7 @@
 
 # Add new scheduled transaction
 
-## POST { endpoint } /user/transaction
+## POST { endpoint } /user/transaction/<accountID>
 
 ### Request body
 
@@ -140,7 +149,7 @@
 
 # Delete a schedule transaction
 
-## DEL { endpoint } /user/transaction?id=xxx
+## DEL { endpoint } /user/transaction/<accountID>
 
 ### Request body
 
@@ -162,7 +171,7 @@
 
 # Update user details
 
-## PUT { endpoint } /user?id=xxx
+## PUT { endpoint } /user/<accountID>
 
 ### Request body
 
