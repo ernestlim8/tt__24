@@ -6,12 +6,13 @@ import { BrowserRouter as Router, Route, Routes, Switch, useNavigate } from 'rea
 import CreateTransaction from './components/CreateTransaction';
 import ProfilePage from './components/ProfilePage';
 import Home from './pages/Home';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import TransactionList from './components/TransactionList';
+import AuthContext from './auth-context';
 
 function App() {
-  const [user, setUser] = useState("1");
-  const navigate = useNavigate();
+ const authCtx = useContext(AuthContext);
+ const navigate = useNavigate();
 
   function Logout() {
     setUser(null);
@@ -21,10 +22,10 @@ function App() {
     navigate(`/account/${id}`)
   }
 
-
+   
   return (
     <div className="App">
-      {!user 
+      {!authCtx.isLoggedIn
       
       ? <Login/>
       : <Routes>
@@ -34,8 +35,8 @@ function App() {
             <Route path="/create" element={<CreateTransaction />} />
             <Route path="/account/:id" element={<TransactionList />} />
           </Route>
-        </Routes>
-      )}
+          </Routes>
+        }
     </div>
   );
 }
