@@ -11,7 +11,7 @@ def createScheudleTransaction(transactionInfo):
     cur.execute(
                 "INSERT INTO ScheduledTransactions"+
                 "(TransactionID, AccountID,ReceivingAccountID,TransactionAmount,Comment,scheduledTime, transactionStatus)"+
-                "VALUES ("+ conn.escape(tid)+","+ conn.escape(transactionInfo["accID"])+","+ conn.escape(transactionInfo["transactionAmt"])+","
+                "VALUES ("+ conn.escape(tid)+","+ conn.escape(transactionInfo["accID"])+","+ conn.escape(transactionInfo["recipientId"])+","+ conn.escape(transactionInfo["transactionAmt"])+","
                 + conn.escape(transactionInfo["comment"]) +conn.escape(transactionInfo["scheduleTime"])+conn.escape(transactionInfo['transactionStatus'])+ ");"  
             )
     cur.commit()
@@ -24,12 +24,35 @@ def createTransaction(transactionInfo):
     cur.execute(
                 "INSERT INTO ScheduledTransactions"+
                 "(TransactionID, AccountID,ReceivingAccountID,TransactionAmount,Comment,scheduledTime, transactionStatus,Date)"+
-                "VALUES ("+ conn.escape(tid)+","+ conn.escape(transactionInfo["accID"])+","+ conn.escape(transactionInfo["transactionAmt"])+","
+                "VALUES ("+ conn.escape(tid)+","+ conn.escape(transactionInfo["accID"])+","+ conn.escape(transactionInfo["recipientId"])+","+ conn.escape(transactionInfo["amount"])+","
                 + conn.escape(transactionInfo["comment"]) +conn.escape(transactionInfo["scheduleTime"])+conn.escape(transactionInfo['transactionStatus']),+conn.escape(transactionInfo['scheduleTime'])+ ");"  
             )
     cur.commit()
     conn.close()
 
+
+def getTransaction(accountID, limit,offset):
+    conn = connectDB()
+    cur = conn.cursor()
+    cur.execute("Select * From ScheduledTransactions where accountID= "+ conn.escape(accountID) + " ORDER BY scheduledTime limit "+ conn.escape(limit) + " OFFSET "+ conn.escape(offset)+';')
+    result = cur.fetchall()
+    conn.close()
+    return result
+
+def getTotalCount(accountID):
+    conn = connectDB()
+    cur = conn.cursor()
+    cur.execute("Select count(TransactionID) From ScheduledTransactions where accountID= "+ conn.escape(accountID) +' ;')
+    result = cur.fetchone()
+    conn.close()
+    return result
+
+def deleteTransaction(transactionID):
+    conn = connectDB()
+    cur = conn.cursor()
+    cur.execute("Delete from ScheduledTransactions where TransactionID = "+conn.escape(transactionID)+";" )
+    cur.commit()
+    conn.close()
 
 
 def connectDB():
