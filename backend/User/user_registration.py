@@ -127,7 +127,6 @@ class loginUser(Resource):
         errors = UserLoginInput.validate(request.args)
         if errors:
             abort(401,str('User does not exist'))
-<<<<<<< HEAD
         #     return jsonify(
         #     {
         #         "code": 500,
@@ -135,9 +134,6 @@ class loginUser(Resource):
         #     }
         # ), 500
             return
-=======
-
->>>>>>> 763750a27552133940d076041de193af7acfaa58
         user_details_input = UserLoginInput.dump(request.args)
         username_input = user_details_input['username']
         password_input = user_details_input['password']
@@ -164,7 +160,7 @@ class loginUser(Resource):
                     cursor.execute(SQLPassword)
                     user_pw = cursor.fetchone()
                     if str(user_pw[0]) == str(hashed_password):
-                        return (200, user_id[0])
+                        return (user_id[0])
                     else: 
                         abort(401,str('password incorrect'))
                         # # return jsonify(

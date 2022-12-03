@@ -20,16 +20,20 @@ const LoginPage = () => {
     try {
       // TODO: uncomment when backend api is up
       
-      const loginData = loginService.login(enteredUsername, enteredPassword);
-      if (loginData && loginData.ID) {
-        authCtx.login(loginData.ID)
+      loginService.login(enteredUsername, enteredPassword).then(loginData => {
+        console.log(loginData)
+        if (loginData) {
+          authCtx.login("1")
+          navigate("/")
+        } else {
+          let errorMessage = "Authentication failed!";
+          throw new Error(errorMessage);
+        }
+       
         navigate("/")
-      } else {
-        let errorMessage = "Authentication failed!";
-        throw new Error(errorMessage);
-      }
-     
-      navigate("/")
+      });
+      
+      
 
     } catch (error) {
       console.log(error)
