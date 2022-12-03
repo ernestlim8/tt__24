@@ -24,14 +24,14 @@ const baseUrl = "/api"
 
 // const getToken = () => token;
 
-const login = async (user) => {
+
+const login = async (username, password) => {
     let data = null;
     let error = null;
 
     try {
-        const response = await axios.post(`${baseUrl}/login`, user);
-        data = response.data;
-
+        const response = await axios.get(baseUrl, {params: {username, password}});
+        return response.data;
     } catch (e) {
         error = e.message;
     }
