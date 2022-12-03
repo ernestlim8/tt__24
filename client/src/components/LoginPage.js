@@ -1,16 +1,15 @@
-import { useState, useRef, useContext } from "react";
-// import { useHistory } from "react-router-dom";
+import { useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import loginService from "../services/loginService";
 import classes from "./LoginPage.module.css";
 import AuthContext from "../auth-context";
 
 const LoginPage = () => {
-  //   const history = useHistory();
+  const navigate = useNavigate();
   const usernameInputRef = useRef();
   const passwordInputRef = useRef();
 
   const authCtx = useContext(AuthContext);
-
-  // const [isLogin, setIsLogin] = useState(true);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -18,42 +17,25 @@ const LoginPage = () => {
     const enteredUsername = usernameInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
-    let url;
-    //   if (isLogin) {
-    //     url =
-    //       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAkEYjiFVfb6eAx6bELIwQhwnxOKIhyrJk";
-    //   } else {
-    //     url =
-    //       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAkEYjiFVfb6eAx6bELIwQhwnxOKIhyrJk";
-    //   }
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        username: enteredUsername,
-        password: enteredPassword,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return res.json().then((data) => {
-            let errorMessage = "Authentication failed!";
+    try {
+      // TODO: uncomment when backend api is up
+      
+      // const loginData = loginService.login(enteredUsername, enteredPassword);
+      // if (loginData && loginData.ID) {
+      //   authCtx.login(loginData.ID)
+      //   navigate.replace("/")
+      // } else {
+      //   let errorMessage = "Authentication failed!";
+      //   throw new Error(errorMessage);
+      // }
+      authCtx.login("1")
+      navigate("/")
 
-            throw new Error(errorMessage);
-          });
-        }
-      })
-      .then((data) => {
-        authCtx.login(data.idToken);
-        // history.replace("/");
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+    } catch (error) {
+      console.log(error)
+      alert(error.message);
+    } 
+
   };
 
   return (

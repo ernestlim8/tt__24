@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Login from './pages/Login.js'
 import Dashboard from './pages/Dashboard';
@@ -6,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Switch, useNavigate } from 'rea
 import CreateTransaction from './components/CreateTransaction';
 import ProfilePage from './components/ProfilePage';
 import Home from './pages/Home';
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import TransactionList from './components/TransactionList';
 import AuthContext from './auth-context';
 
@@ -15,7 +14,7 @@ function App() {
  const navigate = useNavigate();
 
   function Logout() {
-    setUser(null);
+    authCtx.logout()
   }
 
   function navigateToAccount(id) {
