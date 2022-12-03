@@ -1,28 +1,45 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "../components/BankDetail.module.css"
 
-function BankDetail() {
-    const [accountType, setAccountType] = useState("Saving");
-    const [balance, setBalance] = useState(100);
-    const [accountId, setAccountId] = useState("12345")
+function BankDetail(props) {
+
+    const [accounts, setAccounts] = useState([{
+        "id": 12345,
+        "type": "investment",
+        "balance": 123.93,
+    },
+    {
+        "id": 12211,
+        "type": "savings",
+        "balance": 321.87,
+    }]);
+
     return (
-      <div className={styles.main}>
-        <div className={styles.accountId}>
-            <p>Account ID: {accountId}</p>
+        <div className={styles.main}>
+            <h2>Accounts</h2>
+            {
+                accounts.map((account, id) => 
+                    <div className={styles.account} onClick={() => props.navigateToAccount(account.id)}>
+                        <div className={styles.accountId}>
+                            <span>ID: {account.id}</span>
+                        </div>
+                        <div className={styles.accountDetails}>
+                            <div className={styles.accountType}>
+                                <p>{account.type} Account</p>
+                            </div>
+                            <div className={styles.bankBalance}>
+                                <p>${account.balance}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                )
+            }
+
+
         </div>
-        <div className={styles.accountDetails}>
-            <div className={styles.accountType}>
-                <p>{accountType}s Account</p>      
-            </div>
-            <div className={styles.bankBalance}>
-                <p>Bank Balance</p>
-                <p>${balance}</p>
-            </div>
-        </div>
-        
-      </div>
     );
-  }
-  
-  export default BankDetail;
-  
+}
+
+export default BankDetail;
