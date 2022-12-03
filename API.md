@@ -1,6 +1,6 @@
 # Verify username and password
 
-## GET { endpoint } /login
+## POST { endpoint } /login
 
 ### Request body
 
