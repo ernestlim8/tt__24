@@ -41,7 +41,7 @@ const TransactionList = () => {
         try {
           await transactionService.postDeleteTransaction(transactionId);
     
-          const updatedTransaction = initialTransaction.filter((transaction) => transaction.id !== transactionId);
+          const updatedTransaction = initialTransaction.filter((transaction) => transaction.TransactionID !== transactionId);
           setTransaction(updatedTransaction);
         } catch (exception) {
           console.log("error" + exception.response.data.error);

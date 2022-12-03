@@ -13,15 +13,11 @@ const Transaction = ({transaction, deleteTransaction}) => {
 
     const [active, setActive] = useState(currentDateInUtc < transactionDateInUtc ? true : false)
     const showWhenActive = {display: active ? " " : "none"}
-    console.log(active)
-    console.log(currentDateInUtc)
-    console.log(transactionDateInUtc)
 
 
     const removeTransaction = () => {
-        deleteTransaction(transaction.id)
+        deleteTransaction(transaction.TransactionID)
     }
-
 
     return (
         <div>
