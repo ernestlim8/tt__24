@@ -1,11 +1,8 @@
 import './App.css';
-import Login from './pages/Login.js'
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
+import {Login, Register, Dashboard, Home} from './pages'
 import { BrowserRouter as Router, Route, Routes, Switch, useNavigate } from 'react-router-dom';
 import CreateTransaction from './components/CreateTransaction';
 import ProfilePage from './components/ProfilePage';
-import Home from './pages/Home';
 import { useContext } from 'react';
 import TransactionList from './components/TransactionList';
 import AuthContext from './auth-context';
