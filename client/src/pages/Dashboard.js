@@ -1,3 +1,4 @@
+import BankDetail from "../components/BankDetail";
 import Navbar from "../components/Navbar";
 import Transaction from "../components/Transaction";
 
@@ -6,8 +7,8 @@ function Dashboard() {
       <div className="App">
         <p>Dashboard</p>
         <Navbar/>
-        <Transaction/>
-        
+        <Transaction/>     
+        <BankDetail />
       </div>
     );
   }
