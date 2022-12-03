@@ -1,0 +1,29 @@
+.main {
+   border: 1px solid black;
+   width: 70%;
+   margin: 0 auto;
+}
+
+.accountType {
+    width: 50%;
+    text-transform: capitalize;
+    margin-top: 4px;
+}
+
+.bankBalance {
+    width: 50%;
+    font-size: larger;
+}
+
+.accountDetails {
+    display: flex;
+}
+
+.accountId {
+    text-align: left;
+}
+
+.account {
+    border: 1px solid black;
+    padding: 5px;
+}

@@ -1,12 +1,33 @@
 # Verify username and password
 
-## GET { endpoint } /login?username=xxx&password=xxx
+## POST { endpoint } /login
+
+### Request body
+
+- password is hashed before sending, and saved as a hash in the db
+
+```json
+{
+  "username": "ronald",
+  "password": 123456789
+}
+```
 
 ### Response body
+
+- successful authentication
 
 ```json
 {
   "ID": 1
+}
+```
+
+- unsuccessful authetication
+
+```json
+{
+  "message": 401
 }
 ```
 
@@ -65,7 +86,7 @@
 
 # Get list of transaction details
 
-## GET { endpoint } /user/transaction?id=xxx&account_id=xxx
+## GET { endpoint } /user/transaction/<accountID>/<page>
 
 ### Response body
 
@@ -75,7 +96,9 @@
 
 ```json
 {
-    "transactions":
+  "totalPage": 1,
+  "totalTransaction":2 ,
+  "transactionInfo":
     {
         "id": 12345,
         "recipientId": 34567,
@@ -98,7 +121,7 @@
 
 # Add new scheduled transaction
 
-## POST { endpoint } /user/transaction?id=xxx
+## POST { endpoint } /user/transaction
 
 ### Request body
 
@@ -109,7 +132,6 @@
 {
   "id": 12345,
   "recipientId": 34567,
-  "entryDatetime": 123456789,
   "scheduledDatetime": 987654321,
   "amount": 123.45,
   "comment": "for mom"
