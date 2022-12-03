@@ -1,11 +1,12 @@
 import { Outlet } from "react-router-dom";
 import BankDetail from "../components/BankDetail";
+import BankList from "../components/BankList";
 import Navbar from "../components/Navbar";
 
-function Home() {
+function Home(props) {
     return (
       <div className="App">
-        <BankDetail/>
+        <BankList navigateToAccount={props.navigateToAccount} />
       </div>
     );
   }
