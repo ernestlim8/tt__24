@@ -1,12 +1,12 @@
 import axios from "axios";
-const baseUrl = "/api/users";
+const baseUrl = "http://localhost:5002/user";
 
 const getAccounts = async (id) => {
   let data = null;
   let error = null;
 
   try {
-    const response = await axios.get(`${baseUrl}/account?id=${id}`, user);
+    const response = await axios.get(`${baseUrl}/account/${id}`);
     data = response.data;
 
   } catch (e) {
@@ -17,21 +17,21 @@ const getAccounts = async (id) => {
   }
 }
 
-const updateUser = async (id) => {
-  let data = null;
-  let error = null;
+// const updateUser = async (id) => {
+//   let data = null;
+//   let error = null;
 
-  try {
-    const response = await axios.put(`${baseUrl}?id=${id}`, user);
-    data = response.data;
+//   try {
+//     const response = await axios.put(`${baseUrl}?id=${id}`, user);
+//     data = response.data;
 
-  } catch (e) {
-    error = e.message;
-  }
-  return {
-    data, error
-  }
-}
+//   } catch (e) {
+//     error = e.message;
+//   }
+//   return {
+//     data, error
+//   }
+// }
 
 // eslint-disable-next-line
-export default { getAccounts, updateUser };
+export default { getAccounts };

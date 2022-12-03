@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import { useContext } from 'react';
 import TransactionList from './components/TransactionList';
 import AuthContext from './auth-context';
+import BankList from './components/BankList';
 
 function App() {
  const authCtx = useContext(AuthContext);
@@ -29,7 +30,7 @@ function App() {
       ? <Login/>
       : <Routes>
           <Route element={<Dashboard Logout={Logout} />}>
-            <Route index element={<Home navigateToAccount={navigateToAccount}/>} />
+            <Route index element={<BankList navigateToAccount={navigateToAccount}/>} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/create" element={<CreateTransaction />} />
             <Route path="/account/:id" element={<TransactionList />} />
