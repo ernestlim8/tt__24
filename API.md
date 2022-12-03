@@ -75,7 +75,7 @@
 
 # Get list of transaction details
 
-## GET { endpoint } /user/transaction/<accountID>/<page>
+## GET { endpoint } /user/transaction/accountID/page
 
 ### Response body
 
