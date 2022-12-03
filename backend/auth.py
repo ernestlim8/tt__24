@@ -50,7 +50,7 @@ class loginUser(Resource):
                     cursor.execute(SQLPassword)
                     user_pw = cursor.fetchone()
                     if str(user_pw[0]) == str(hashed_password):
-                        return "200" #(render_template)
+                        return (200, user_id[0])
                     else: 
                         abort(401,str('password incorrect'))
              

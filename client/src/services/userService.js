@@ -1,12 +1,12 @@
 import axios from "axios";
-const baseUrl = "/api/users";
+const baseUrl = "http://localhost:5002/user";
 
 const getAccounts = async (id) => {
   let data = null;
   let error = null;
 
   try {
-    const response = await axios.get(`${baseUrl}/account?id=${id}`);
+    const response = await axios.get(`${baseUrl}/account/${id}`);
     data = response.data;
 
   } catch (e) {
@@ -20,7 +20,6 @@ const getAccounts = async (id) => {
 const updateUser = async (id) => {
   let data = null;
   let error = null;
-
   try {
     const response = await axios.put(`${baseUrl}?id=${id}`);
     data = response.data;

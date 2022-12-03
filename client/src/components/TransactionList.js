@@ -10,6 +10,7 @@ import {
     TableHead
   } from "@material-ui/core";
 import AuthContext from "../auth-context";
+import transaction from "./Transaction";
 
 const TransactionList = () => {
 
@@ -23,8 +24,10 @@ const TransactionList = () => {
     const id = authCtx.id;
 
     useEffect(() => {
+        const urlArr = window.location.href.split("/")
+        const accountID = urlArr[urlArr.length - 1]
         transactionService
-          .getTransactions(621156213, 1)
+          .getTransactions(accountID, 1)
           .then(response => {
             // TODO: Error handling
             const initialTransaction = response.data.message.transactionInfo;
