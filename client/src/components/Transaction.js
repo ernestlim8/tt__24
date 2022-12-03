@@ -10,11 +10,11 @@ const Transaction = ({transaction}) => {
         <div>
             <TableBody>
                 <TableRow>
-                    <TableCell style={{width: 200}}>{transaction.AccountID}</TableCell>
-                    <TableCell style={{width: 250}}>{transaction.ReceivingAccountID}</TableCell>
-                    <TableCell style={{width: 200}}>{transaction.Date}</TableCell>
-                    <TableCell style={{width: 230}}>{transaction.TransactionAmount}</TableCell>
-                    <TableCell style={{width: 200}}>{transaction.Comment}</TableCell>
+                    <TableCell style={{width: 200}}>{transaction.accountID}</TableCell>
+                    <TableCell style={{width: 250}}>{transaction.receivingAccountID}</TableCell>
+                    <TableCell style={{width: 200}}>{transaction.date}</TableCell>
+                    <TableCell style={{width: 230}}>{transaction.transactionAmount}</TableCell>
+                    <TableCell style={{width: 200}}>{transaction.comment}</TableCell>
                 </TableRow>
             </TableBody>
         </div>
