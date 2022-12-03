@@ -15,16 +15,30 @@ def createTransaction():
         data = request.get_json()
         timeStamp = data["scheduleTime"]
         schduledDate  = datetime.datetime.fromtimestamp( int(timeStamp) )
+        account = transactionRepo.getAccountID(data["recipientId"])
+        print(account)
+        if len(account) == 0:
+            return jsonify(
+                {
+                    "code": 200,
+                    "Error": "Recipient Account Not Found"
+                }
+            ), 200 
         if schduledDate > currDate:
             data["transactionStatus"] ="pending"
             transactionRepo.createScheudleTransaction(data)
         else:
+            print("Here")
+            ## increase account balance
+            transactionRepo.increaseTransaction(data["recipientId"],data["amount"] )
+            # decrease account balance
+            transactionRepo.decreaseTransaction(data["accID"],data["amount"] )
             data["transactionStatus"] ="Done"
             transactionRepo.createTransaction(data)
         return jsonify(
             {
                 "code": 200,
-                "message": "ok"
+                "message": "Transaction Successful"
             }
         ), 200
     except Exception as e:
@@ -32,7 +46,7 @@ def createTransaction():
         return jsonify(
             {
                 "code": 500,
-                "message": "server error"
+                "Error": "server error"
             }
         ), 500
 
@@ -41,7 +55,7 @@ def createTransaction():
 @app.route("/user/transaction/<accountID>/<page>")
 def getTransaction(accountID,page):
     try:
-        limit = 5
+        limit = 100
         offset = limit *(int(page)-1)
         all_transaction = transactionRepo.getTransaction(accountID, limit, offset)
         print(all_transaction)
@@ -97,7 +111,12 @@ def updateAll():
         currDate = datetime.datetime.now()
         ids = transactionRepo.getTransactionID(time.mktime(currDate.timetuple()))
         for i in ids:
-            transactionRepo.UpdateTransaction(i[0], time)
+            print()
+            transactionRepo.UpdateTransaction(i[0], time.mktime(currDate.timetuple()))
+            ## increase account balance
+            transactionRepo.increaseTransaction(i[2],i[4])
+            # decrease account balance
+            transactionRepo.decreaseTransaction(i[1],i[4] )
         return jsonify(
             {
                 "code": 200,

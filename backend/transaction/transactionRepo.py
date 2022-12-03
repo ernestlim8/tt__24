@@ -58,7 +58,7 @@ def deleteTransaction(transactionID):
 def getTransactionID(time):
     conn = connectDB()
     cur = conn.cursor()
-    cur.execute("select TransactionID from ScheduledTransactions where scheduledTime <= "+conn.escape(time)+";" )
+    cur.execute("select * from ScheduledTransactions where scheduledTime <= "+conn.escape(time)+" AND transactionStatus= 'Pending';" )
     result = cur.fetchall()
     # conn.commit()
     conn.close()
@@ -72,6 +72,29 @@ def UpdateTransaction(id, time):
     conn.commit()
     conn.close()
 
+def getAccountID(accountID):
+    conn=connectDB()
+    cur= conn.cursor()
+    cur.execute("Select * from bankaccount where AccountID="+conn.escape(accountID)+";")
+    result = cur.fetchall()
+    conn.commit()
+    return result
+
+def increaseTransaction(id, amt):
+    conn = connectDB()
+    cur = conn.cursor()
+    cur.execute("Update bankaccount SET AccountBalance=AccountBalance+"+conn.escape(amt)+" WHERE AccountID = "+ conn.escape(id)+";")
+    # result = cur.fetchall()
+    conn.commit()
+    conn.close()
+
+def decreaseTransaction(id, amt):
+    conn = connectDB()
+    cur = conn.cursor()
+    cur.execute("Update bankaccount SET AccountBalance=AccountBalance-"+conn.escape(amt)+" WHERE AccountID = "+ conn.escape(id)+";")
+    # result = cur.fetchall()
+    conn.commit()
+    conn.close()
 
 def connectDB():
     load_dotenv()
