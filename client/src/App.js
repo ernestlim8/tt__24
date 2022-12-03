@@ -34,9 +34,8 @@ function App() {
             <Route path="/create" element={<CreateTransaction />} />
             <Route path="/account/:id" element={<TransactionList />} />
           </Route>
-        </Routes>}
-      
-     
+        </Routes>
+      )}
     </div>
   );
 }
