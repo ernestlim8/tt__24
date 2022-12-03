@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const baseUrl = "/api/login"
+
+const baseUrl = "http://localhost:5000/login"
+
 
 // const setUser = (user) => {
 //   window.localStorage.setItem("loggedAppUser", JSON.stringify(user));
