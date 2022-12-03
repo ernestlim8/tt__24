@@ -20,8 +20,8 @@ def connectDB():
     return pymysql.connect(
         host="localhost",
         user="root",
-        password="password",
-        database="dbsseed (bank)"
+        password="Xarielle6!",
+        database="Bank"
     )
 
 
@@ -37,7 +37,7 @@ def login():
     if request.method == 'GET':
         return "200"
     if request.method == 'POST':
-        errors = UserLoginInput.validate(request.arg)
+        errors = UserLoginInput.validate(request.args)
         if errors:
             pymysql.abort(401,str('User does not exist'))
 
@@ -46,15 +46,21 @@ def login():
         password_input = user_details_input['password']
 
         conn = connectDB()
-        cursor = conn.cursor()
 
-        user_name = cursor.execute("SELECT UserID FROM User WHERE Username=?", (username_input,)).fetchone()
-        if user_name:
-            user_pw = cursor.execute("SELECT Password FROM User WHERE Username=?", (username_input,)).fetchone()
-            if user_pw == password_input:
-                return "200" #(render_template)
-            else: 
-                pymysql.abort(401,str('password incorrect'))
+        with conn:
+            with conn.cursor() as cursor:
+            # Create a new record
+            # sql = "INSERT INTO `users` (`email`, `password`) VALUES (%s, %s)"
+            # cursor.execute(sql, ('webmaster@python.org', 'very-secret'))
+
+                user_id = cursor.execute("SELECT UserID FROM User WHERE Username=?", (username_input,)).fetchone()
+                print (user_id)
+                if user_id:
+                    user_pw = cursor.execute("SELECT Password FROM User WHERE Username=?", (username_input,)).fetchone()
+                    if user_pw == password_input:
+                        return "200" #(render_template)
+                    else: 
+                        pymysql.abort(401,str('password incorrect'))
              
 if __name__ == '__main__':
     app.run()
