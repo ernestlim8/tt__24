@@ -83,7 +83,7 @@ const TransactionList = () => {
             <TableRow>
                 {transaction.map(transaction =>
                 <Transaction key={transaction.TransactionID} transaction={transaction} /> )}
-            </TableRow>
+            </TableRow> 
             </div>
         </div>
     )
