@@ -1,4 +1,6 @@
 import pymysql
+import uuid
+import hashlib
 
 from flask import Flask, request, abort
 from flask_restful import Resource, Api
@@ -43,11 +45,16 @@ class registerUser(Resource):
         with conn.cursor() as cursor:
             cursor.execute("USE `Bank`")
 
+        # grab the latest userID
+        with conn.cursor() as cursor:
+            cursor.execute("SELECT max(UserID) FROM `User`")
+
         # Create a new record
-        newUserID = 1002
+        newUserID = uuid.uuid4()
+        hashedPassword = hashlib.sha256(student_name_input['password'].encode('utf-8')).hexdigest()
         sql = '''
             INSERT INTO `User` VALUES (%s,'%s','%s','%s','%s','%s','%s',_binary '\\%s');
-            ''' % (str(newUserID), student_name_input['username'], student_name_input['password'], student_name_input['firstName'], student_name_input['lastName'], student_name_input['email'], student_name_input['address'], student_name_input['optIntoPhyStatements'])
+            ''' % (str(newUserID), student_name_input['username'], hashedPassword, student_name_input['firstName'], student_name_input['lastName'], student_name_input['email'], student_name_input['address'], student_name_input['optIntoPhyStatements'])
 
         print (sql)
         
