@@ -124,7 +124,7 @@ class loginUser(Resource):
     def post(self):
         errors = UserLoginInput.validate(request.args)
         if errors:
-            pymysql.abort(401,str('User does not exist'))
+            abort(401,str('User does not exist'))
 
         user_details_input = UserLoginInput.dump(request.args)
         username_input = user_details_input['username']
