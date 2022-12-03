@@ -8,6 +8,7 @@ const Register = () => {
   const navigate = useNavigate();
   const usernameInputRef = useRef();
   const passwordInputRef = useRef();
+  const confirmPasswordInputRef = useRef();
   const firstNameInputRef = useRef();
   const lastNameInputRef = useRef();
   const emailInputRef = useRef();
@@ -20,10 +21,16 @@ const Register = () => {
 
     const username = usernameInputRef.current.value;
     const password = passwordInputRef.current.value;
+    const confirmPassword = confirmPasswordInputRef.current.value;
     const firstName = firstNameInputRef.current.value;
     const lastName = lastNameInputRef.current.value;
     const email = emailInputRef.current.value;
     const address = addressInputRef.current.value;
+
+    if (confirmPassword !== password) {
+        alert("Passwords do not match!")
+        return;
+    }
 
     // TODO: hash password and confirm password matches
     const user = {
@@ -76,6 +83,15 @@ const Register = () => {
             id="password"
             required
             ref={passwordInputRef}
+          />
+        </div>
+        <div className={classes.control}>
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            required
+            ref={confirmPasswordInputRef}
           />
         </div>
         <div className={classes.control}>
