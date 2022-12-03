@@ -51,7 +51,7 @@ def getTransaction(accountID,page):
         transactionInfo =[]
         for i in all_transaction:
             print("here")
-            transactionInfo.append({"TransactionID":i[0],"accountID": i[1], "ReceivingAccountID":i[2], "date":i[3], "transactionAmount":float(i[4]),"comment":i[5], "scheduledTime":i[6], "transactionStatus":i[7]})
+            transactionInfo.append({"transactionID":i[0],"accountID": i[1], "receivingAccountID":i[2], "date":i[3], "transactionAmount":float(i[4]),"comment":i[5], "scheduledTime":i[6], "transactionStatus":i[7]})
         result["transactionInfo"] = transactionInfo
         result ["totalPage"] = math.ceil(totalTransaction[0]/5)
         result["totalTransaction"] = totalTransaction[0]
