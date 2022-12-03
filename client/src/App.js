@@ -1,10 +1,8 @@
 import './App.css';
-import Login from './pages/Login.js'
-import Dashboard from './pages/Dashboard';
+import {Login, Register, Dashboard, Home} from './pages'
 import { BrowserRouter as Router, Route, Routes, Switch, useNavigate } from 'react-router-dom';
 import CreateTransaction from './components/CreateTransaction';
 import ProfilePage from './components/ProfilePage';
-import Home from './pages/Home';
 import { useContext } from 'react';
 import TransactionList from './components/TransactionList';
 import AuthContext from './auth-context';
@@ -25,9 +23,11 @@ function App() {
    
   return (
     <div className="App">
-      {!authCtx.isLoggedIn
-      
-      ? <Login/>
+      {!authCtx.isLoggedIn ? 
+      <Routes>
+        <Route index element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
+      </Routes>
       : <Routes>
           <Route element={<Dashboard Logout={Logout} />}>
             <Route index element={<BankList navigateToAccount={navigateToAccount}/>} />

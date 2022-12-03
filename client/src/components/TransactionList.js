@@ -13,9 +13,11 @@ import AuthContext from "../auth-context";
 
 const TransactionList = () => {
 
-    const [transactions, setTransaction] = useState([])
+    const [initialTransaction, setTransaction] = useState([])
+
     const [user, setUser] = useState('')
     const [page, setPage] = useState(1)
+
 
     const authCtx = useContext(AuthContext);
     const id = authCtx.id;
@@ -32,6 +34,18 @@ const TransactionList = () => {
             setTransaction(initialTransaction)
           })
       }, [])
+
+
+    const deleteTransaction = async (transactionId) => {
+        try {
+          await transactionService.postDeleteTransaction(transactionId);
+    
+          const updatedTransaction = initialTransaction.filter((transaction) => transaction.id !== transactionId);
+          setTransaction(updatedTransaction);
+        } catch (exception) {
+          console.log("error" + exception.response.data.error);
+        }
+      };
 
     return (
         <div>
@@ -50,8 +64,8 @@ const TransactionList = () => {
                 </TableHead>
             </Table>
             <TableRow>
-                {transactions.map(transaction =>
-                <Transaction key={transaction.TransactionID} transaction={transaction} /> )}
+                {initialTransaction.map(transaction =>
+                <Transaction key={transaction.TransactionID} transaction={transaction} deleteTransaction={deleteTransaction} /> )}
             </TableRow>
             </div>
         </div>

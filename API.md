@@ -1,13 +1,13 @@
 # Verify username and password
 
-## GET { endpoint } /login
+## POST { endpoint } /login
 
 ### Request body
 
 ```json
 {
-  "username": "ronald",
-  "password": 123456789
+  "Username": "ronald",
+  "Password": 123456789
 }
 ```
 
@@ -37,13 +37,13 @@
 
 ```json
 {
-    "username": "ronald",
-    "password": "ABC123",
-    "firstName": "ronald",
-    "lastName": "tan",
-    "email": "abc@gmail.com",
-    "address": "changi business park",
-    "optIntoPhyStatements": True,
+    "Username": "ronald",
+    "Password": "ABC123",
+    "Firstname": "ronald",
+    "LastName": "tan",
+    "Email": "abc@gmail.com",
+    "Dddress": "changi business park",
+    "OptIntoPhyStatements": True,
 }
 ```
 
@@ -59,7 +59,7 @@
 
 # Get bank account details
 
-## GET { endpoint } /user/account/<accountID>
+## GET { endpoint } /user/account/<UserID>
 
 ### Response body
 
@@ -69,14 +69,14 @@
 {
     "accounts":
     {
-        "id": 12345,
-        "type": "investment",
-        "balance": 123.93,
+        "AccountID": 12345,
+        "AccountType": "investment",
+        "AccountBalance": 123.93,
     },
     {
-        "id": 12211,
-        "type": "savings",
-        "balance": 321.87,
+        "AccountID": 12211,
+        "AccountType": "savings",
+        "AccountBalance": 321.87,
     },
     ...
 }
@@ -179,7 +179,7 @@
 
 ```json
 {
-  "email": "xyz@gmail.com"
+  "Email": "xyz@gmail.com"
 }
 ```
 
@@ -187,12 +187,12 @@
 
 ```json
 {
-    "username": "ronald",
-    "password": "ABC123",
-    "firstName": "ronald",
-    "lastName": "tan",
-    "email": "xyz@gmail.com",
-    "address": "changi business park",
-    "optIntoPhyStatements": True,
+    "Username": "ronald",
+    "Password": "ABC123",
+    "FirstName": "ronald",
+    "LastName": "tan",
+    "Email": "xyz@gmail.com",
+    "Address": "changi business park",
+    "OptIntoPhyStatements": True,
 }
 ```

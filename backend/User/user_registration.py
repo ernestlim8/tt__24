@@ -6,12 +6,14 @@ from flask import Flask, request, abort
 from flask_restful import Resource, Api
 from marshmallow import Schema, fields
 
+from dotenv import load_dotenv
+
 app = Flask(__name__)
 api = Api(app)
 
 localhost='localhost'
 user='root'
-password='password'
+password='ronaldtan123'
 
 class UserRegistrationInputSchema(Schema):
     username = fields.Str(required=True)
@@ -67,4 +69,48 @@ class registerUser(Resource):
 
 api.add_resource(registerUser, '/user/', endpoint='user')
 
-app.run(debug=True)
+def connectDB():
+    load_dotenv()
+    return pymysql.connect(
+        host=localhost,
+        user=user,
+        password=password,
+        database="Bank"
+    )
+
+
+# Update user details
+@app.route("/user/<accountID>", methods=["PUT"])
+def UpdateUser(accountID):
+    conn = connectDB()
+    cur = conn.cursor()
+    data = request.get_json()
+
+    executionString = "SET "
+    for key,val in data.items():
+        executionString += key + "=" + conn.escape(val)
+
+    executionString = "UPDATE USER " + executionString + "WHERE UserID=" + conn.escape(accountID) +";"
+    cur.execute(
+        executionString
+    )
+    conn.commit()
+
+    # Get current data
+    cur.execute(
+        "Select * From User where UserID=" + conn.escape(accountID)
+    )
+    result = cur.fetchone()
+    conn.close()
+    data = {
+        "UserID": result[0],
+        "Username": result[1],
+        "Password": result[2],
+        "Firstname": result[3],
+        "Lastname": result[4],
+        "Email": result[5],
+        "Address": result[6]
+    }
+    return data
+
+app.run(host="0.0.0.0", port=5001, debug=True)
