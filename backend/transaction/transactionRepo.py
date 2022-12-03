@@ -55,6 +55,23 @@ def deleteTransaction(transactionID):
     conn.commit()
     conn.close()
 
+def getTransactionID(time):
+    conn = connectDB()
+    cur = conn.cursor()
+    cur.execute("select TransactionID from ScheduledTransactions where scheduledTime <= "+conn.escape(time)+";" )
+    result = cur.fetchall()
+    # conn.commit()
+    conn.close()
+    return result
+
+def UpdateTransaction(id, time):
+    conn = connectDB()
+    cur = conn.cursor()
+    cur.execute("Update ScheduledTransactions SET Date="+conn.escape(time)+", transactionStatus = 'Done' WHERE TransactionID = "+ conn.escape(id))
+    # result = cur.fetchall()
+    conn.commit()
+    conn.close()
+
 
 def connectDB():
     load_dotenv()

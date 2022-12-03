@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS `Bank`;
--- Create Database Bank;
+Create Database Bank;
 -- CREATE DATABASE  IF NOT EXISTS `2` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `Bank`;
 -- MySQL dump 10.13  Distrib 8.0.21, for macos10.15 (x86_64)
@@ -113,7 +113,7 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-08-20 22:55:07bankaccount
-alter table ScheduledTransactions add scheduledTime varchar(255);
+alter table ScheduledTransactions add scheduledTime bigint;
 alter table ScheduledTransactions add transactionStatus varchar(255);
 
 select * from ScheduledTransactions;
