@@ -5,10 +5,12 @@ import hashlib
 from flask import Flask, request, abort,jsonify
 from flask_restful import Resource, Api
 from marshmallow import Schema, fields
+from flask_cors import CORS
 
 from dotenv import load_dotenv
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 localhost='localhost'
@@ -125,6 +127,7 @@ class loginUser(Resource):
         errors = UserLoginInput.validate(request.args)
         if errors:
             abort(401,str('User does not exist'))
+<<<<<<< HEAD
         #     return jsonify(
         #     {
         #         "code": 500,
@@ -132,6 +135,9 @@ class loginUser(Resource):
         #     }
         # ), 500
             return
+=======
+
+>>>>>>> 763750a27552133940d076041de193af7acfaa58
         user_details_input = UserLoginInput.dump(request.args)
         username_input = user_details_input['username']
         password_input = user_details_input['password']

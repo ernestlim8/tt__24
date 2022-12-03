@@ -62,80 +62,16 @@ const Register = () => {
     } 
 
   };
+import RegisterPage from "../components/RegisterPage";
+import { Link } from "react-router-dom";
+import { FormContainer } from "../components/FormContainer";
 
+function Register() {
   return (
-    <section className={classes.auth}>
-      <h1>Register</h1>
-      <form onSubmit={submitHandler}>
-        <div className={classes.control}>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            required
-            ref={usernameInputRef}
-          />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            required
-            ref={passwordInputRef}
-          />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            required
-            ref={confirmPasswordInputRef}
-          />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            type="text"
-            id="firstName"
-            required
-            ref={firstNameInputRef}
-          />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            type="text"
-            id="lastName"
-            required
-            ref={lastNameInputRef}
-          />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            required
-            ref={emailInputRef}
-          />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="address">Address</label>
-          <input
-            type="text"
-            id="address"
-            required
-            ref={addressInputRef}
-          />
-        </div>
-        <div className={classes.actions}>
-          <button>Register</button>
-        </div>
-      </form>
-    </section>
+    <FormContainer>
+      <RegisterPage />
+    </FormContainer>
   );
-};
+}
 
 export default Register;
