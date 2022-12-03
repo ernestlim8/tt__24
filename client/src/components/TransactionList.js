@@ -25,7 +25,7 @@ const TransactionList = () => {
             "TransactionID": 2,
             "AccountID": 958945214,
             "ReceivingAccountID": 621156213,
-            "Date": "2022-11-08T04:00:00.000Z",
+            "Date": "2023-11-08T04:00:00.000Z",
             "TransactionAmount": 8996.00,
             "Comment": "School Fees"
         },
@@ -56,6 +56,17 @@ const TransactionList = () => {
     ])
     const [user, setUser] = useState('')
 
+    const deleteTransaction = async (transactionId) => {
+        try {
+          await transactionService.remove(transactionId);
+    
+          const updatedTransaction = transaction.filter((transaction) => transaction.id !== transactionId);
+          setTransaction(updatedTransaction);
+        } catch (exception) {
+          console.log("error" + exception.response.data.error);
+        }
+      };
+
     // useEffect(() => {
     //     transactionService
     //       .getAll()
@@ -82,7 +93,7 @@ const TransactionList = () => {
             </Table>
             <TableRow>
                 {transaction.map(transaction =>
-                <Transaction key={transaction.TransactionID} transaction={transaction} /> )}
+                <Transaction key={transaction.TransactionID} transaction={transaction} deleteTransaction={deleteTransaction} /> )}
             </TableRow>
             </div>
         </div>
