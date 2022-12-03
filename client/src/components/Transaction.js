@@ -6,7 +6,6 @@ import {
   } from "@material-ui/core";
 import { display } from "@mui/system";
 import { useState } from "react";
-
 const Transaction = ({transaction, deleteTransaction}) => {
 
     const transactionDateInUtc = new Date(transaction.Date)
@@ -23,6 +22,7 @@ const Transaction = ({transaction, deleteTransaction}) => {
         deleteTransaction(transaction.id)
     }
 
+
     return (
         <div>
             <TableBody>
@@ -35,6 +35,7 @@ const Transaction = ({transaction, deleteTransaction}) => {
                     <TableCell><Button style={showWhenActive} variant="contained" color="error" size="small" onClick={removeTransaction}>delete</Button></TableCell>
                 </TableRow>
             </TableBody>
+            <link to="/create">Create New Transaction</link>
         </div>
     )
 }

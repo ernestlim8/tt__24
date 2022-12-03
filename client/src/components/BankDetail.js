@@ -5,17 +5,16 @@ import styles from "../components/BankDetail.module.css"
 function BankDetail({account, navigateToAccount}) {
 
     return (
-
         <div className={styles.account} onClick={() => navigateToAccount(account.id)}>
             <div className={styles.accountId}>
-                <span>ID: {account.id}</span>
+                <span>ID: {account.AccountID}</span>
             </div>
             <div className={styles.accountDetails}>
                 <div className={styles.accountType}>
-                    <p>{account.type} Account</p>
+                    <p>{account.AccountType} Account</p>
                 </div>
                 <div className={styles.bankBalance}>
-                    <p>${account.balance}</p>
+                    <p>${account.AccountBalance}</p>
                 </div>
             </div>
         </div>

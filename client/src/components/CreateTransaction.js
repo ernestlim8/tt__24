@@ -1,3 +1,5 @@
+import classes from "./CreateTransaction.module.css";
+
 import {useState} from "react";
 
 function CreateTransaction() {
@@ -23,14 +25,13 @@ function CreateTransaction() {
             setComment('')
         }
     }
-
-
-    const content = (
+    
+    return (
       <form onSubmit={onSubmit}>
           <div>
               <h2>New Scheduled Transaction</h2>
-              <div className="form__action-buttons">
-                  <button title="Save" />
+              <div className={classes.flex}>
+                  <button className={classes.button}>Save</button>
 
                   <label htmlFor="recipient_id">
                       Recipient Bank Account ID:
@@ -56,14 +57,14 @@ function CreateTransaction() {
                       onChange={onDateChanged}
                   />
 
-                  <label htmlFor="transaction_amount">
+                  <label htmlFor="transactionAmount">
                       Transaction amount:
                   </label>
                   <input
-                      id="transaction_amount"
-                      name="transaction_amount"
+                      id="transactionAmount"
+                      name="transactionAmount"
                       type="text"
-                      //value={transactionAmount}
+                      value={transactionAmount}
                       autoComplete="off"
                       onChange={onTransactionAmountChanged}
                   />
@@ -83,8 +84,6 @@ function CreateTransaction() {
           </div>
       </form>
     );
-
-    return content
 }
   
 export default CreateTransaction;

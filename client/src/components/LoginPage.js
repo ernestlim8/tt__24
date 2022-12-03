@@ -1,7 +1,7 @@
 import { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import loginService from "../services/loginService";
-import classes from "./LoginPage.module.css";
+import classes from "./Form.module.css";
 import AuthContext from "../auth-context";
 
 const LoginPage = () => {
@@ -23,7 +23,7 @@ const LoginPage = () => {
       // const loginData = loginService.login(enteredUsername, enteredPassword);
       // if (loginData && loginData.ID) {
       //   authCtx.login(loginData.ID)
-      //   navigate.replace("/")
+      //   navigate("/")
       // } else {
       //   let errorMessage = "Authentication failed!";
       //   throw new Error(errorMessage);
