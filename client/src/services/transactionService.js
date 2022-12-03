@@ -1,7 +1,5 @@
 import axios from "axios";
-
-
-const baseUrl = "/api/transaction";
+const baseUrl = "/api/user/transaction";
 
 
 const getAll = async () => {
