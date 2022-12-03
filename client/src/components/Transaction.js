@@ -1,12 +1,16 @@
 import { useState } from "react"
+import transactionService from "../services/transactionService"
+import { useEffect } from "react"
 
-const Transaction = () => {
+const Transaction = ({transaction}) => {
 
-    const [transaction, setTransaction] = useState([])
+
 
     return (
         <div>
-
+            <li>{transaction.user.id} {transaction.receiving.id} {transaction.date} {transaction.amount} {transaction.comment} </li>
         </div>
     )
 }
+
+export default Transaction
